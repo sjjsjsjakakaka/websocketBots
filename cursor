@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-color: #111;
+    margin: 0;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none; /* Let clicks pass through */
+    animation: fade 0.6s linear forwards;
+  }
+
+  @keyframes fade {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: scale(0.2);
+    }
+  }
+</style>
+</head>
+<body>
+
+<script>
+  let hue = 0;
+
+  window.addEventListener('mousemove', (e) => {
+    const dot = document.createElement('div');
+    dot.className = 'trail';
+    
+
+    dot.style.left = `${e.pageX}px`;
+    dot.style.top = `${e.pageY}px`;
+    
+
+    dot.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+    
+    document.body.appendChild(dot);
+    
+
+    hue = (hue + 5) % 360;
+
+
+    setTimeout(() => {
+      dot.remove();
+    }, 600);
+  });
+</script>
+
+</body>
+</html>
